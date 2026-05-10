@@ -413,10 +413,10 @@ async function loadSheetData() {
     rows.slice(1).forEach(row => {
       if (row[0]) {
         sheetData[row[0]] = {
-          stato: row[1] || "da-verificare",
-          nota: row[2] || "",
-          data: row[3] || "",
-          autore: row[4] || ""
+          stato: row[2] || "da-verificare",
+          nota: row[3] || "",
+          data: row[4] || "",
+          autore: row[5] || ""
         };
       }
     });
