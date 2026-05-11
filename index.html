@@ -5,10 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Monitoraggio del Piano di Gestione del Ciclo Integrato dei Rifiuti e Gestione dei Servizi di Igiene Urbana 2025-2029 – Torre del Greco</title>
 <style>
-  /* ================================================
-     CONFIGURAZIONE: sostituisci i due valori qui sotto
-     ================================================ */
-
   :root {
     --status-ok: #3B6D11;
     --status-ok-bg: #EAF3DE;
@@ -31,7 +27,6 @@
     --radius-md: 8px;
     --radius-lg: 12px;
   }
-
   @media (prefers-color-scheme: dark) {
     :root {
       --color-text-primary: #f0f0f0;
@@ -46,9 +41,7 @@
       --status-check-bg: #0a1e3a;
     }
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     background: var(--color-bg);
@@ -59,8 +52,6 @@
     max-width: 820px;
     margin: 0 auto;
   }
-
-  /* Header */
   .app-header {
     border-bottom: 1px solid var(--color-border);
     padding-bottom: 1.25rem;
@@ -77,11 +68,6 @@
     font-size: 20px;
     font-weight: 600;
     color: var(--color-text-primary);
-    margin-bottom: 4px;
-  }
-  .app-subtitle {
-    font-size: 13px;
-    color: var(--color-text-secondary);
     margin-bottom: 8px;
   }
   .app-notice {
@@ -92,8 +78,6 @@
     padding: 8px 12px;
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
   }
-
-  /* Loading / error */
   .loading-msg {
     text-align: center;
     padding: 3rem 1rem;
@@ -109,8 +93,6 @@
     font-size: 13px;
     margin-bottom: 1rem;
   }
-
-  /* Stats */
   .stats-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -124,17 +106,8 @@
     text-align: center;
     border: 1px solid var(--color-border);
   }
-  .stat-label {
-    font-size: 11px;
-    color: var(--color-text-tertiary);
-    margin-bottom: 4px;
-  }
-  .stat-value {
-    font-size: 24px;
-    font-weight: 600;
-  }
-
-  /* Legend */
+  .stat-label { font-size: 11px; color: var(--color-text-tertiary); margin-bottom: 4px; }
+  .stat-value { font-size: 24px; font-weight: 600; }
   .legend {
     display: flex;
     flex-wrap: wrap;
@@ -145,8 +118,6 @@
   }
   .legend-item { display: flex; align-items: center; gap: 6px; }
   .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-
-  /* Filters */
   .filter-row {
     display: flex;
     gap: 6px;
@@ -171,8 +142,6 @@
     color: var(--color-bg);
     border-color: var(--color-text-primary);
   }
-
-  /* Sections */
   .section-block {
     margin-bottom: 1rem;
     border: 1px solid var(--color-border);
@@ -200,19 +169,19 @@
     display: inline-block;
   }
   .section-chevron.open { transform: rotate(180deg); }
-
   .service-list { display: none; }
   .service-list.open { display: block; }
-
   .service-row {
+    border-bottom: 1px solid var(--color-border);
+  }
+  .service-row:last-child { border-bottom: none; }
+  .service-row-header {
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: start;
     gap: 16px;
     padding: 0.875rem 1.125rem;
-    border-bottom: 1px solid var(--color-border);
   }
-  .service-row:last-child { border-bottom: none; }
   .service-name { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
   .service-desc { font-size: 12px; color: var(--color-text-secondary); line-height: 1.55; }
   .service-note {
@@ -223,13 +192,14 @@
     padding-top: 5px;
     border-top: 1px dashed var(--color-border);
   }
-  .service-meta {
-    font-size: 11px;
-    color: var(--color-text-tertiary);
-    margin-top: 3px;
+  .service-meta { font-size: 11px; color: var(--color-text-tertiary); margin-top: 3px; }
+  .service-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
   }
-
-  /* Status badges */
   .status-badge {
     font-size: 11px;
     font-weight: 600;
@@ -237,23 +207,36 @@
     border-radius: 999px;
     white-space: nowrap;
     border: 1px solid;
-    flex-shrink: 0;
     letter-spacing: 0.01em;
   }
   .status-badge.implementato { background: var(--status-ok-bg); color: var(--status-ok); border-color: var(--status-ok-border); }
   .status-badge.parziale { background: var(--status-partial-bg); color: var(--status-partial); border-color: var(--status-partial-border); }
   .status-badge.non-implementato { background: var(--status-no-bg); color: var(--status-no); border-color: var(--status-no-border); }
   .status-badge.da-verificare { background: var(--status-check-bg); color: var(--status-check); border-color: var(--status-check-border); }
-
-  /* Last update */
-  .last-update {
-    font-size: 12px;
+  .detail-btn {
+    font-size: 11px;
     color: var(--color-text-tertiary);
-    text-align: right;
-    margin-bottom: 1rem;
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 3px 10px;
+    cursor: pointer;
+    white-space: nowrap;
   }
-
-  /* Footer */
+  .detail-btn:hover { border-color: var(--color-text-tertiary); color: var(--color-text-secondary); }
+  .service-detail {
+    display: none;
+    padding: 0.75rem 1.125rem 1rem;
+    background: var(--color-bg-secondary);
+    border-top: 1px solid var(--color-border);
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+  .service-detail.open { display: block; }
+  .service-detail p { margin-bottom: 0.5rem; }
+  .service-detail p:last-child { margin-bottom: 0; }
+  .service-detail em { color: var(--color-text-tertiary); font-style: italic; }
   .app-footer {
     margin-top: 3rem;
     padding-top: 1.25rem;
@@ -265,12 +248,11 @@
     flex-wrap: wrap;
     gap: 8px;
   }
-
   @media (max-width: 600px) {
     body { padding: 1.25rem 1rem 3rem; }
     .stats-row { grid-template-columns: repeat(2, 1fr); }
-    .service-row { grid-template-columns: 1fr; }
-    .status-badge { align-self: flex-start; }
+    .service-row-header { grid-template-columns: 1fr; }
+    .service-right { flex-direction: row; align-items: center; }
   }
 </style>
 </head>
@@ -285,9 +267,7 @@
 </header>
 
 <div id="mainContent">
-  <div class="loading-msg" id="loadingMsg">
-    ⟳ Caricamento dati in corso...
-  </div>
+  <div class="loading-msg" id="loadingMsg">⟳ Caricamento dati in corso...</div>
 </div>
 
 <footer class="app-footer">
@@ -296,13 +276,8 @@
 </footer>
 
 <script>
-/* ================================================
-   CONFIGURAZIONE – modifica solo questi due valori
-   ================================================ */
 const SHEET_ID = "1Wfk2oHfDcw6CdDzybqQjUbmG9hPyObeHqMmvp1QqPE0";
 const API_KEY  = "AIzaSyCfPPNwSS6a2nX01DLX1jgRxo3YCUmAb1Q";
-/* ================================================ */
-
 const SHEET_NAME = "Servizi";
 const SHEET_URL = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_NAME}?key=${API_KEY}`;
 
@@ -317,86 +292,196 @@ const SECTIONS = [
   {
     id: "porta-a-porta", icon: "🏠", title: "Raccolta porta a porta",
     services: [
-      { id:"pp1",  name:"Raccolta frazione umida – utenze domestiche",        desc:"Frequenza trisettimanale con sacchi compostabili certificati UNI EN 13432. Orario esposizione: 20:00-23:00 (ott-apr) / 21:00-23:00 (mag-set). Raccolta dalle 06:00." },
-      { id:"pp2",  name:"Raccolta frazione umida – utenze non domestiche food",desc:"7 giorni su 7. Servizio supplementare pomeridiano (15:00-17:00) nei weekend nel periodo mag-set per attività food." },
-      { id:"pp3",  name:"Raccolta frazione secca residua – domestiche",        desc:"1 volta a settimana. Smaltimento a carico del Comune." },
-      { id:"pp4",  name:"Raccolta frazione secca residua – non domestiche",    desc:"2 volte a settimana." },
-      { id:"pp5",  name:"Raccolta carta e cartone",                            desc:"1 volta a settimana per domestiche e non domestiche. Uffici pubblici e scuole: contenitori ecobox interni. Controllo visivo su conformità conferimento." },
-      { id:"pp6",  name:"Raccolta multimateriale leggero – domestiche",        desc:"1 volta a settimana con sacchi LDPE da 100 litri." },
-      { id:"pp7",  name:"Raccolta multimateriale leggero – non domestiche",    desc:"3 volte a settimana. Sacchi da 100 litri forniti dalla ditta appaltatrice." },
-      { id:"pp8",  name:"Raccolta vetro – domestiche",                         desc:"1 volta a settimana. Secchi forniti dalla ditta. Accorgimenti per riduzione impatto acustico." },
-      { id:"pp9",  name:"Raccolta vetro – non domestiche",                     desc:"3 volte a settimana. Bidoni forniti dalla ditta appaltatrice." },
-      { id:"pp10", name:"Raccolta cartone – non domestiche",                   desc:"6 giorni su 7, servizio 'a vetrina'. Cartoni schiacciati esposti entro le 04:00 del giorno di raccolta." },
-      { id:"pp11", name:"Raccolta pannoloni su richiesta",                     desc:"Servizio domiciliare dedicato il venerdì per utenze che ne facciano richiesta." },
-      { id:"pp12", name:"Raccolta rifiuti verdi (sfalci e potature)",          desc:"Contestuale al ritiro umido per piccole quantità (max 3 secchi da 25 litri). Su prenotazione per quantità maggiori." },
-      { id:"pp13", name:"Raccolta ingombranti e RAEE a domicilio",             desc:"Su prenotazione telefonica, email o app. Ritiro entro 7 giorni. Max 5 pezzi per utenza. Numero verde attivo 9:00-14:00." },
-      { id:"pp14", name:"Autocompostaggio",                                    desc:"Fornitura compostiere in comodato d'uso gratuito. Riduzione TARI del 30% per aderenti." },
+      { id:"pp1", name:"Raccolta frazione umida – utenze domestiche",
+        desc:"Frequenza trisettimanale con sacchi compostabili certificati UNI EN 13432. Orario esposizione: 20:00-23:00 (ott-apr) / 21:00-23:00 (mag-set). Raccolta dalle 06:00.",
+        detail:"La ditta appaltatrice è tenuta a raccogliere la frazione umida (scarti di cucina di origine vegetale e animale) presso tutte le utenze domestiche del territorio comunale con frequenza trisettimanale. Ogni nucleo familiare riceve in dotazione una biopattumiera da 10 litri e sacchi biodegradabili e compostabili certificati UNI EN 13432, forniti dalla ditta.\n\nI rifiuti devono essere esposti dai cittadini nelle adiacenze del proprio domicilio entro le ore 23:00 (dalle 20:00 nel periodo ottobre-aprile; dalle 21:00 nel periodo maggio-settembre). La raccolta inizia dalle ore 06:00. La ditta è tenuta a effettuare un controllo visivo su ogni sacco prima del prelievo: i sacchi non conformi non vengono raccolti e vengono contrassegnati con un avviso adesivo. I sacchi non prelevati devono essere ritirati entro le successive 48 ore.\n\n(art. 33.2.1 del Capitolato Speciale d'Appalto)" },
+      { id:"pp2", name:"Raccolta frazione umida – utenze non domestiche food",
+        desc:"7 giorni su 7. Servizio supplementare pomeridiano (15:00-17:00) nei weekend nel periodo mag-set per attività food.",
+        detail:"Per le utenze non domestiche del settore alimentare (ristoranti, pizzerie, ortofrutta, mense scolastiche e aziendali, ecc.) la raccolta della frazione umida è garantita 7 giorni su 7. Le utenze che effettuano chiusura pomeridiana possono conferire i rifiuti nella fascia 14:00-15:00, con raccolta prevista dalle ore 16:00.\n\nNel periodo maggio-settembre, su richiesta delle attività food, è previsto un servizio supplementare pomeridiano nella fascia oraria 15:00-17:00 nei fine settimana e nei giorni festivi infrasettimanali. Il conferimento avviene in sacchi biodegradabili e compostabili a carico dell'utenza, oppure in cassonetti carrellati da 120 litri.\n\n(art. 33.2.1 del Capitolato Speciale d'Appalto)" },
+      { id:"pp3", name:"Raccolta frazione secca residua – domestiche",
+        desc:"1 volta a settimana. Smaltimento a carico del Comune.",
+        detail:"La ditta raccoglie la frazione secca residua — ovvero i rifiuti non riciclabili, non pericolosi e non compostabili — presso le utenze domestiche con frequenza di una volta a settimana. I rifiuti vengono conferiti dai cittadini in sacchi a perdere a carico dell'utenza, esposti nelle adiacenze del domicilio entro le ore 23:00 (dalle 20:00 nel periodo ottobre-aprile; dalle 21:00 nel periodo maggio-settembre). La raccolta inizia dalle ore 06:00.\n\nI costi di smaltimento della frazione secca residua sono a carico del Comune. La ditta è tenuta a verificare visivamente il contenuto di ogni sacco prima del prelievo: i sacchi che contengono materiali riciclabili non vengono raccolti e vengono contrassegnati con un avviso di non conformità.\n\n(art. 33.2.3 del Capitolato Speciale d'Appalto)" },
+      { id:"pp4", name:"Raccolta frazione secca residua – non domestiche",
+        desc:"2 volte a settimana.",
+        detail:"La raccolta della frazione secca residua presso le utenze non domestiche (attività commerciali, ristoranti, uffici, ecc.) avviene con frequenza di due volte a settimana. Il conferimento avviene in sacchi a perdere a carico dell'utenza, esposti in prossimità dell'attività entro le ore 23:00 (dalle 20:00 nel periodo ottobre-aprile; dalle 21:00 nel periodo maggio-settembre). Le attività con chiusura pomeridiana possono conferire entro le ore 14:00, con raccolta prevista nel pomeriggio. I costi di smaltimento sono a carico del Comune.\n\n(art. 33.2.3 del Capitolato Speciale d'Appalto)" },
+      { id:"pp5", name:"Raccolta carta e cartone",
+        desc:"1 volta a settimana per domestiche e non domestiche. Uffici pubblici e scuole: contenitori ecobox interni. Controllo visivo su conformità conferimento.",
+        detail:"La ditta raccoglie carta e cartone — grafica, stampata, cartoncini e imballaggi — presso le utenze domestiche e non domestiche con frequenza di una volta a settimana. Il conferimento avviene in sacchi a perdere a carico dell'utenza, esposti in prossimità del domicilio o dell'attività entro le ore 23:00 (dalle 20:00 nel periodo ottobre-aprile; dalle 21:00 nel periodo maggio-settembre).\n\nPer gli uffici pubblici e le scuole, la ditta è tenuta a ritirare i rifiuti direttamente negli spazi interni, fornendo contenitori tipo ecobox. La ditta effettua un controllo visivo su ogni sacco prima del prelievo: i sacchi non conformi o contaminati non vengono raccolti. I proventi derivanti dal consorzio COMIECO spettano alla ditta appaltatrice.\n\n(art. 33.2.4 del Capitolato Speciale d'Appalto)" },
+      { id:"pp6", name:"Raccolta multimateriale leggero – domestiche",
+        desc:"1 volta a settimana con sacchi LDPE da 100 litri.",
+        detail:"La ditta raccoglie il multimateriale leggero — imballaggi in plastica, lattine e contenitori metallici in alluminio o banda stagnata — presso le utenze domestiche con frequenza di una volta a settimana. Il conferimento avviene in sacchi LDPE da 100 litri, esposti in prossimità del domicilio entro le ore 23:00 (dalle 20:00 nel periodo ottobre-aprile; dalle 21:00 nel periodo maggio-settembre). I sacchi LDPE sono forniti dalla ditta. I proventi CONAI derivanti dalla raccolta spettano alla ditta appaltatrice.\n\n(art. 33.2.5 del Capitolato Speciale d'Appalto)" },
+      { id:"pp7", name:"Raccolta multimateriale leggero – non domestiche",
+        desc:"3 volte a settimana. Sacchi da 100 litri forniti dalla ditta appaltatrice.",
+        detail:"La raccolta del multimateriale leggero presso le utenze non domestiche avviene con frequenza di tre volte a settimana. I sacchi LDPE da 100 litri sono forniti dalla ditta appaltatrice. Il conferimento avviene in prossimità dell'attività entro le ore 23:00 (dalle 21:00 alle 24:00); le attività con chiusura pomeridiana possono conferire entro le ore 14:00, con raccolta pomeridiana dedicata. I proventi CONAI spettano alla ditta; i costi di selezione e sovvallo sono a carico del Comune fino al 31/03/2026, e successivamente a carico della ditta.\n\n(art. 33.2.8 del Capitolato Speciale d'Appalto)" },
+      { id:"pp8", name:"Raccolta vetro – domestiche",
+        desc:"1 volta a settimana. Secchi forniti dalla ditta. Accorgimenti per riduzione impatto acustico.",
+        detail:"La ditta raccoglie vetro e imballaggi in vetro presso le utenze domestiche con frequenza di una volta a settimana. I contenitori (secchi) sono forniti dalla ditta e devono essere esposti in prossimità del domicilio entro le ore 23:00 (dalle 20:00 nel periodo ottobre-aprile; dalle 21:00 nel periodo maggio-settembre). La ditta è tenuta ad adottare tutti gli accorgimenti tecnici necessari per ridurre l'impatto acustico durante la raccolta. In caso di danneggiamento accidentale dei contenitori, la sostituzione è a carico della ditta senza oneri per il Comune.\n\n(art. 33.2.6 del Capitolato Speciale d'Appalto)" },
+      { id:"pp9", name:"Raccolta vetro – non domestiche",
+        desc:"3 volte a settimana. Bidoni forniti dalla ditta appaltatrice.",
+        detail:"La raccolta di vetro e imballaggi in vetro presso le utenze non domestiche avviene con frequenza di tre volte a settimana. I bidoni sono forniti dalla ditta appaltatrice e devono essere posizionati in modo da non costituire intralcio al transito. Il conferimento avviene nella fascia oraria 21:00-24:00. La ditta adotta accorgimenti per ridurre l'impatto acustico e provvede alla sostituzione dei contenitori danneggiati senza oneri aggiuntivi per il Comune. I proventi CONAI spettano alla ditta.\n\n(art. 33.2.9 del Capitolato Speciale d'Appalto)" },
+      { id:"pp10", name:"Raccolta cartone – non domestiche",
+        desc:"6 giorni su 7, servizio 'a vetrina'. Cartoni schiacciati esposti entro le 04:00 del giorno di raccolta.",
+        detail:"Per le utenze non domestiche è previsto un servizio di raccolta del cartone 'a vetrina' con frequenza di sei giorni su sette. I cartoni devono essere opportunamente schiacciati e impacchettati, ed esposti in prossimità dell'attività dopo le ore 21:00 del giorno precedente la raccolta e comunque entro le ore 04:00 del giorno di raccolta. Le attività con chiusura pomeridiana possono conferire entro le ore 14:00, con raccolta pomeridiana dedicata. I proventi CONAI spettano alla ditta appaltatrice.\n\n(art. 33.2.7 del Capitolato Speciale d'Appalto)" },
+      { id:"pp11", name:"Raccolta pannoloni su richiesta",
+        desc:"Servizio domiciliare dedicato il venerdì per utenze che ne facciano richiesta.",
+        detail:"La ditta garantisce un servizio domiciliare dedicato alla raccolta dei pannoloni per le utenze domestiche che ne facciano esplicita richiesta. Il servizio viene effettuato nella giornata del venerdì, salvo diverse indicazioni dell'Amministrazione. La richiesta di attivazione del servizio può essere presentata tramite il numero verde della ditta.\n\n(art. 33.2.3 del Capitolato Speciale d'Appalto)" },
+      { id:"pp12", name:"Raccolta rifiuti verdi (sfalci e potature)",
+        desc:"Contestuale al ritiro umido per piccole quantità (max 3 secchi da 25 litri). Su prenotazione per quantità maggiori.",
+        detail:"La ditta raccoglie i rifiuti verdi prodotti dalle utenze domestiche (sfalci d'erba, potature, scarti vegetali) secondo tre modalità: contestualmente al ritiro della frazione umida per piccole quantità (fino a 3 secchi da 25 litri); tramite conferimento diretto presso il Centro Comunale di Raccolta; su prenotazione per quantità maggiori, con ritiro di massimo 5 sacchi per volta. Gli sfalci e le potature vengono conferiti presso impianti di compostaggio autorizzati. I costi di smaltimento sono a carico del Comune.\n\n(art. 33.4.2 del Capitolato Speciale d'Appalto)" },
+      { id:"pp13", name:"Raccolta ingombranti e RAEE a domicilio",
+        desc:"Su prenotazione telefonica, email o app. Ritiro entro 7 giorni. Max 5 pezzi per utenza. Numero verde attivo 9:00-14:00.",
+        detail:"La ditta garantisce la raccolta a domicilio di rifiuti ingombranti (mobili, materassi, elettrodomestici, serramenti, ecc.) e di apparecchiature elettriche ed elettroniche fuori uso (RAEE) su prenotazione. Il ritiro deve avvenire entro 7 giorni dalla prenotazione, per un massimo di 5 pezzi per utenza. La prenotazione può essere effettuata telefonicamente, via email o tramite app; il numero verde è attivo con risposta diretta dalle 9:00 alle 14:00 e con segreteria h24.\n\nI rifiuti devono essere conferiti dai cittadini a bordo strada. I RAEE vengono raccolti e depositati separatamente dagli altri ingombranti, nel rispetto delle norme sui circuiti refrigeranti. I ricavi derivanti da materiali ferrosi e legno spettano alla ditta.\n\n(art. 33.4.3 del Capitolato Speciale d'Appalto)" },
+      { id:"pp14", name:"Autocompostaggio",
+        desc:"Fornitura compostiere in comodato d'uso gratuito. Riduzione TARI del 30% per aderenti.",
+        detail:"Il Comune incentiva la pratica del compostaggio domestico, ovvero il trattamento biologico degli scarti organici effettuato direttamente dalle utenze per produrre compost da utilizzare in loco. La ditta appaltatrice è tenuta a fornire compostiere in comodato d'uso gratuito alle utenze domestiche che ne facciano richiesta. Le utenze aderenti al programma beneficiano di una riduzione della TARI pari al 30%. Le informazioni per aderire sono disponibili presso l'Ufficio Compostaggio del Comune e sul sito istituzionale.\n\n(art. 33.2.2 del Capitolato Speciale d'Appalto)" },
     ]
   },
   {
     id: "prossimita", icon: "📍", title: "Raccolta di prossimità e punti attrezzati",
     services: [
-      { id:"pr1", name:"Gestione punti di prossimità informatizzati",  desc:"Ogni punto: contenitore 3200 lt per multimateriale, carta, secco; 1100 lt per vetro; 3200 lt per organico; contenitore indumenti. Accesso riservato a titolari TARI tramite tessera." },
-      { id:"pr2", name:"Frequenza svuotamento punti di prossimità",    desc:"Organico: 3 volte/settimana. Secco, multimateriale, carta: 2 volte/settimana. Vetro: 1 volta/settimana. Indumenti: 1 volta/settimana (trisettimanale a mag e nov)." },
-      { id:"pr3", name:"Sanificazione punti di prossimità",            desc:"Sanificazione esterna con prodotti biologici. Lavaggio mensile con automezzo lava-cassonetti. Rimozione manuale rifiuti abbandonati nelle adiacenze." },
-      { id:"pr4", name:"Gestione eco-isole informatizzate (10 siti)",  desc:"Postazioni: Palatucci, via Santuario, Ferrovia, De Nicola, Luise, Scappi Novesca, Repubblica, Camaldoli, Litoranea, Aldo Moro. Svuotamento almeno 1 volta/giorno lun-ven, doppio giro sab-dom. Apertura h24 7/7." },
-      { id:"pr5", name:"Sanificazione eco-isole",                      desc:"Bisettimanale in estate, settimanale in inverno. Lavaggio mensile con lava-cassonetti." },
+      { id:"pr1", name:"Gestione punti di prossimità informatizzati",
+        desc:"Ogni punto: contenitore 3200 lt per multimateriale, carta, secco; 1100 lt per vetro; 3200 lt per organico; contenitore indumenti. Accesso riservato a titolari TARI tramite tessera.",
+        detail:"Il territorio comunale è dotato di punti di raccolta di prossimità, ciascuno attrezzato con i seguenti contenitori forniti dalla ditta: un contenitore da 3.200 litri per il multimateriale, uno da 3.200 litri per la carta e il cartone, uno da 3.200 litri per il secco residuo, uno da 1.100 litri per il vetro, uno da 3.200 litri per la frazione organica e un contenitore per indumenti usati. I punti di prossimità sono informatizzati: l'accesso è riservato ai titolari TARI residenti nella zona di riferimento tramite tessera. La ditta è tenuta a garantire un controllo continuo di questi siti, assicurando decoro e pulizia anche degli spazi adiacenti e rimuovendo manualmente i rifiuti depositati abusivamente nelle immediate vicinanze.\n\n(art. 33.3 del Capitolato Speciale d'Appalto)" },
+      { id:"pr2", name:"Frequenza svuotamento punti di prossimità",
+        desc:"Organico: 3 volte/settimana. Secco, multimateriale, carta: 2 volte/settimana. Vetro: 1 volta/settimana. Indumenti: 1 volta/settimana (trisettimanale a mag e nov).",
+        detail:"Lo svuotamento dei contenitori nei punti di prossimità avviene con frequenze differenziate per tipologia di rifiuto: tre volte a settimana per la frazione organica; due volte a settimana per il secco residuo, il multimateriale e la carta e cartone; una volta a settimana per il vetro. I contenitori per indumenti vengono svuotati una volta a settimana per la maggior parte dell'anno, con frequenza trisettimanale nei mesi di maggio e novembre, in corrispondenza del cambio stagione. Lo svuotamento viene effettuato con compattatori mono-operatore.\n\n(art. 33.3 del Capitolato Speciale d'Appalto)" },
+      { id:"pr3", name:"Sanificazione punti di prossimità",
+        desc:"Sanificazione esterna con prodotti biologici. Lavaggio mensile con automezzo lava-cassonetti. Rimozione manuale rifiuti abbandonati nelle adiacenze.",
+        detail:"La ditta è tenuta a garantire la sanificazione regolare dei punti di prossimità. La sanificazione esterna dei contenitori viene effettuata con prodotti biologici; il lavaggio avviene mensilmente con automezzo lava-cassonetti. La ditta provvede inoltre alla rimozione manuale dei rifiuti depositati abusivamente nelle adiacenze dei punti di raccolta, al fine di mantenere il decoro degli spazi pubblici circostanti.\n\n(art. 33.3 del Capitolato Speciale d'Appalto)" },
+      { id:"pr4", name:"Gestione eco-isole informatizzate (10 siti)",
+        desc:"Postazioni: Palatucci, via Santuario, Ferrovia, De Nicola, Luise, Scappi Novesca, Repubblica, Camaldoli, Litoranea, Aldo Moro. Svuotamento almeno 1 volta/giorno lun-ven, doppio giro sab-dom. Apertura h24 7/7.",
+        detail:"Sul territorio comunale sono presenti 10 eco-isole informatizzate, situate nei seguenti punti: Parcheggio Palatucci, via del Santuario, Piazzale Ferrovia, via E. De Nicola, via Antonio Luise, via Scappi Novesca, Piazzale della Repubblica, via di Sotto ai Camaldoli, Parcheggio Litoranea, via Aldo Moro. Le eco-isole sono accessibili h24 7 giorni su 7 a tutti i titolari TARI e consentono il conferimento differenziato di cinque tipologie di rifiuto: multimateriale, organico, carta, vetro e secco residuo.\n\nLa ditta è tenuta a garantire lo svuotamento almeno quotidiano dal lunedì al venerdì e un doppio giro di raccolta il sabato e la domenica, e comunque a riempimento. La ditta gestisce il sistema di controllo degli accessi, provvede alla manutenzione ordinaria e straordinaria delle postazioni e garantisce assistenza continua.\n\n(art. 33.4.1 del Capitolato Speciale d'Appalto)" },
+      { id:"pr5", name:"Sanificazione eco-isole",
+        desc:"Bisettimanale in estate, settimanale in inverno. Lavaggio mensile con lava-cassonetti.",
+        detail:"La ditta provvede alla sanificazione regolare delle eco-isole informatizzate con frequenza bisettimanale nel periodo estivo e settimanale in quello invernale. Mensilmente viene effettuato il lavaggio dei contenitori interni (cassonetti da 1.100 litri) con automezzo lava-cassonetti. La ditta è tenuta a redigere un piano di lavaggio e pulizia delle postazioni e a effettuare la sanificazione esterna con prodotti biologici.\n\n(art. 33.4.1 del Capitolato Speciale d'Appalto)" },
     ]
   },
   {
     id: "speciali", icon: "📦", title: "Servizi speciali e frazioni particolari",
     services: [
-      { id:"sp1",  name:"Raccolta pile esauste",                                    desc:"Frequenza minima quindicinale presso rivenditori e supermercati. Contenitori forniti e mantenuti dalla ditta." },
-      { id:"sp2",  name:"Raccolta farmaci scaduti",                                 desc:"Frequenza minima quindicinale presso farmacie. Contenitori forniti e mantenuti dalla ditta." },
-      { id:"sp3",  name:"Raccolta rifiuti pericolosi (T/F, toner, oli, batterie)",  desc:"Contenitori specifici presso i Centri di Raccolta o, nelle more, in aree comunali autorizzate." },
-      { id:"sp4",  name:"Raccolta oli vegetali",                                    desc:"Contenitori in aree protette (cortili scuole, parrocchie). Manutenzione a carico della ditta. Eventuali ricavi spettano all'appaltatrice." },
-      { id:"sp5",  name:"Raccolta oli minerali – Isola Porto",                      desc:"Servizio mensile mag-set. Contenitori per oli, filtri, batterie. Accesso tramite lettore magnetico. Pulizia bisettimanale griglia e area circostante." },
-      { id:"sp6",  name:"Raccolta indumenti e accessori",                           desc:"Contenitori in aree protette. Svuotamento quindicinale; trisettimanale a mag e nov. Nessuna cernita durante la raccolta." },
-      { id:"sp7",  name:"Raccolta e pulizia aree mercatali",                        desc:"Raccolta differenziata durante e dopo ogni mercato. Costi smaltimento rifiuti mercatali (CER 20 03 02) a carico della ditta." },
-      { id:"sp8",  name:"Raccolta stabilimenti balneari e spiagge libere",          desc:"Alta stagione (1 giu – 15 set): frequenza intensificata. Spiagge libere: trespoli con sacchi svuotati quotidianamente." },
-      { id:"sp9",  name:"Raccolta rifiuti cimitero comunale",                       desc:"3 volte a settimana (sab, lun, gio) entro le 10:00. 25 punti di raccolta. Intensificazione nei periodi festivi." },
-      { id:"sp10", name:"Punti di raccolta area portuale",                          desc:"2 punti di prossimità (molo ponente e levante). Intensificazione in alta stagione (1 giu – 15 set)." },
-      { id:"sp11", name:"Riassetti per rifiuti abbandonati su suolo pubblico",      desc:"4 riassetti settimanali in giorni concordati con l'Ente." },
-      { id:"sp12", name:"Servizi urgenti (rifiuti abbandonati, siringhe, carcasse)",desc:"Intervento entro 2 ore dalla segnalazione. Siringhe in contenitori appositi." },
-      { id:"sp13", name:"Raccolta in occasione di fiere, manifestazioni, sagre",   desc:"Contenitori differenziati, svuotamenti aggiuntivi giornalieri, pulizia finale aree. Su richiesta dell'Ufficio competente." },
+      { id:"sp1", name:"Raccolta pile esauste",
+        desc:"Frequenza minima quindicinale presso rivenditori e supermercati. Contenitori forniti e mantenuti dalla ditta.",
+        detail:"La ditta provvede alla raccolta e al trasporto delle pile esauste di origine domestica presso tutti i rivenditori e supermercati del territorio comunale che commerciano questo tipo di prodotto, con frequenza minima quindicinale e comunque in funzione del grado di riempimento dei contenitori. I contenitori specifici per la raccolta delle pile sono forniti, mantenuti e sostituiti dalla ditta a proprie spese. La ditta è tenuta a utilizzare automezzi autorizzati al trasporto di rifiuti pericolosi. I costi di smaltimento sono a carico del Comune fino al 31/03/2026; successivamente a carico della ditta.\n\n(art. 33.4.5 del Capitolato Speciale d'Appalto)" },
+      { id:"sp2", name:"Raccolta farmaci scaduti",
+        desc:"Frequenza minima quindicinale presso farmacie. Contenitori forniti e mantenuti dalla ditta.",
+        detail:"La ditta provvede alla raccolta e al trasporto dei farmaci scaduti di origine domestica presso tutte le farmacie pubbliche e private del territorio comunale, con frequenza minima quindicinale e comunque in funzione del grado di riempimento dei contenitori. I contenitori specifici sono forniti, mantenuti e sostituiti dalla ditta a proprie spese. La raccolta avviene con automezzi autorizzati al trasporto di rifiuti pericolosi. I costi di smaltimento sono a carico del Comune fino al 31/03/2026; successivamente a carico della ditta.\n\n(art. 33.4.6 del Capitolato Speciale d'Appalto)" },
+      { id:"sp3", name:"Raccolta rifiuti pericolosi (T/F, toner, oli, batterie)",
+        desc:"Contenitori specifici presso i Centri di Raccolta o, nelle more, in aree comunali autorizzate.",
+        detail:"La ditta garantisce la raccolta dei rifiuti urbani pericolosi etichettati con i simboli T (Tossico) o F (Infiammabile) — quali toner esauriti, contenitori contaminati da vernici, oli minerali esausti e batterie provenienti dalla manutenzione di autoveicoli privati — tramite contenitori specifici posizionati presso il Centro Comunale di Raccolta. Nelle more della realizzazione del CDR, i contenitori possono essere installati in aree di competenza di uffici comunali, previa autorizzazione, oppure presso il punto mobile del Parcheggio Palatucci in un giorno dedicato. I costi di smaltimento sono a carico del Comune fino al 31/03/2026; successivamente a carico della ditta.\n\n(art. 33.4.7 del Capitolato Speciale d'Appalto)" },
+      { id:"sp4", name:"Raccolta oli vegetali",
+        desc:"Contenitori in aree protette (cortili scuole, parrocchie). Manutenzione a carico della ditta. Eventuali ricavi spettano all'appaltatrice.",
+        detail:"La ditta provvede alla raccolta degli oli vegetali esausti tramite contenitori di nuova generazione, antitrabocco, posizionati in aree protette quali cortili di scuole, parrocchie, centri di aggregazione e uffici comunali, al fine di evitare fenomeni di abbandono abusivo di altri rifiuti nelle adiacenze. Il numero e la localizzazione delle postazioni vengono definiti in collaborazione con gli uffici comunali. La manutenzione, la pulizia e la sostituzione dei contenitori sono a carico della ditta. Gli eventuali ricavi derivanti dalla raccolta spettano alla ditta appaltatrice, che può stipulare convenzioni con i consorzi di filiera competenti.\n\n(art. 33.4.8 del Capitolato Speciale d'Appalto)" },
+      { id:"sp5", name:"Raccolta oli minerali – Isola Porto",
+        desc:"Servizio mensile mag-set. Contenitori per oli, filtri, batterie. Accesso tramite lettore magnetico. Pulizia bisettimanale griglia e area circostante.",
+        detail:"In ottemperanza alla normativa sulla gestione dei rifiuti portuali, la ditta gestisce l'area denominata 'Isola Porto', destinata alla raccolta dei rifiuti prodotti dai diportisti e dai proprietari di imbarcazioni ormeggiate presso i moli. Il servizio prevede la fornitura e la manutenzione dei serbatoi per la raccolta di oli minerali usati, filtri, stracci unti e batterie esauste. La ditta interviene almeno una volta al mese nel periodo maggio-settembre. L'accesso all'isola è riservato alle utenze autorizzate (diportisti, pontilisti, titolari di pescherecci) tramite serratura automatica con lettore magnetico. La ditta effettua inoltre la pulizia bisettimanale della griglia, della sottogriglia e dell'area circostante per almeno 3 metri.\n\n(art. 33.4.9 del Capitolato Speciale d'Appalto)" },
+      { id:"sp6", name:"Raccolta indumenti e accessori",
+        desc:"Contenitori in aree protette. Svuotamento quindicinale; trisettimanale a mag e nov. Nessuna cernita durante la raccolta.",
+        detail:"La ditta provvede alla raccolta di indumenti e accessori in buono stato tramite contenitori posizionati in aree protette — cortili di scuole, parrocchie, centri di aggregazione, uffici comunali — al fine di prevenire fenomeni di abbandono abusivo di altri rifiuti nelle adiacenze. Lo svuotamento avviene con cadenza quindicinale per la maggior parte dell'anno, con frequenza trisettimanale nei mesi di maggio e novembre in corrispondenza del cambio stagione. Durante le operazioni di raccolta la ditta non effettua alcuna cernita del materiale: tutto il contenuto dei contenitori viene prelevato integralmente. Gli eventuali ricavi spettano alla ditta appaltatrice.\n\n(art. 33.4.4 del Capitolato Speciale d'Appalto)" },
+      { id:"sp7", name:"Raccolta e pulizia aree mercatali",
+        desc:"Raccolta differenziata durante e dopo ogni mercato. Costi smaltimento rifiuti mercatali (CER 20 03 02) a carico della ditta.",
+        detail:"La ditta garantisce la raccolta differenziata dei rifiuti prodotti nelle aree mercatali durante e dopo ogni mercato, fornendo agli operatori mercatali i contenitori per il conferimento differenziato e comunicando loro l'obbligo di lasciare i propri rifiuti nell'apposito contenitore a fine giornata. I mercati presenti sul territorio (I°-V° Traversa Teatro, Traversa via Avezzana, Largo Santissimo, via Falanga, I° e II° Traversa via S. Noto, area mercato Circumvallazione) hanno frequenza quotidiana, inclusa la domenica. La raccolta avviene due volte al giorno per i mercati con orario spezzato (14:00-16:30 e nel giro ordinario), una volta al giorno per la domenica. I costi di smaltimento dei rifiuti mercatali (CER 20 03 02) sono a carico della ditta appaltatrice per tutta la durata dell'appalto.\n\n(art. 33.4.11 del Capitolato Speciale d'Appalto)" },
+      { id:"sp8", name:"Raccolta stabilimenti balneari e spiagge libere",
+        desc:"Alta stagione (1 giu – 15 set): frequenza intensificata. Spiagge libere: trespoli con sacchi svuotati quotidianamente.",
+        detail:"Nel periodo balneare la ditta garantisce la raccolta differenziata presso gli stabilimenti balneari in concessione e le spiagge libere del territorio comunale. Gli stabilimenti balneari sono dotati di bidoni per la raccolta differenziata di organico e vetro; le altre frazioni vengono conferite in appositi sacchi. Nel periodo di alta stagione (1 giugno – 15 settembre) la frequenza di raccolta è intensificata rispetto al resto dell'anno, senza oneri aggiuntivi per il Comune. Nelle spiagge libere la ditta installa trespoli con sacchi per la raccolta indifferenziata, svuotati quotidianamente nel solo periodo di alta stagione.\n\n(art. 33.4.12 del Capitolato Speciale d'Appalto)" },
+      { id:"sp9", name:"Raccolta rifiuti cimitero comunale",
+        desc:"3 volte a settimana (sab, lun, gio) entro le 10:00. 25 punti di raccolta. Intensificazione nei periodi festivi.",
+        detail:"All'interno del cimitero comunale la ditta predispone e gestisce 25 punti di raccolta, ciascuno composto da due contenitori: uno per il verde leggero (fiori freschi, sfalci, piante prive di vaso) e uno per i rifiuti indifferenziati (fiori finti, vasi, imballaggi, lumini, guanti). Il servizio di raccolta e trasporto viene effettuato tre volte a settimana, nelle giornate di sabato, lunedì e giovedì, entro le ore 10:00. Nei periodi di maggiore affluenza — festività natalizie, pasquali, commemorazione dei defunti, festa della mamma e del papà — il servizio può essere intensificato su richiesta del Comune senza oneri aggiuntivi. I costi di smaltimento dell'indifferenziato sono a carico del Comune; quelli del verde leggero sono a carico del Comune fino al 31/03/2026, e successivamente a carico della ditta.\n\n(art. 33.4.13 del Capitolato Speciale d'Appalto)" },
+      { id:"sp10", name:"Punti di raccolta area portuale",
+        desc:"2 punti di prossimità (molo ponente e levante). Intensificazione in alta stagione (1 giu – 15 set).",
+        detail:"Nell'area portuale la ditta installa e gestisce due punti di prossimità — uno sul molo di ponente e uno sul molo di levante — che consentono il conferimento di tutte le tipologie di rifiuto differenziato. Il servizio segue le stesse condizioni previste per le altre zone di raccolta di prossimità, con una intensificazione della frequenza di svuotamento nel periodo di alta stagione (1 giugno – 15 settembre), senza oneri aggiuntivi per il Comune.\n\n(art. 33.4.14 del Capitolato Speciale d'Appalto)" },
+      { id:"sp11", name:"Riassetti per rifiuti abbandonati su suolo pubblico",
+        desc:"4 riassetti settimanali in giorni concordati con l'Ente.",
+        detail:"La ditta effettua quattro riassetti settimanali per la raccolta, lo sgombero e il trasporto dei rifiuti di qualsiasi natura abbandonati su strade e aree pubbliche o private ad uso pubblico, nelle giornate concordate con l'Ente. Su richiesta del Comune, la ditta può effettuare una verifica del contenuto dei rifiuti raccolti al fine di identificare e sanzionare i responsabili dell'abbandono. Prima di ogni riassetto, la ditta provvede alla raccolta separata del materiale riciclabile (legno, ferro, ecc.). In caso di rinvenimento di rifiuti speciali o pericolosi (amianto, rifiuti combusti, ecc.) la ditta adotta piani di intervento specifici, avvalendosi di imprese iscritte all'Albo Nazionale dei Gestori Ambientali.\n\n(art. 33.4.10 del Capitolato Speciale d'Appalto)" },
+      { id:"sp12", name:"Servizi urgenti (rifiuti abbandonati, siringhe, carcasse)",
+        desc:"Intervento entro 2 ore dalla segnalazione. Siringhe in contenitori appositi.",
+        detail:"Per i casi urgenti, la ditta è tenuta a intervenire entro 2 ore dalla segnalazione da parte del Comune o degli uffici competenti. Il servizio comprende: la raccolta e il trasporto di rifiuti abbandonati di qualsiasi natura; la rimozione di siringhe abbandonate su suolo pubblico, che devono essere inserite in appositi contenitori e successivamente smaltite; la raccolta, il trasporto e lo smaltimento di carcasse di animali rinvenute su suolo pubblico. Per i rifiuti di cui si sospetti la pericolosità, la ditta è tenuta ad avvisare preventivamente l'ufficio comunale competente prima della rimozione.\n\n(art. 36 del Capitolato Speciale d'Appalto)" },
+      { id:"sp13", name:"Raccolta in occasione di fiere, manifestazioni, sagre",
+        desc:"Contenitori differenziati, svuotamenti aggiuntivi giornalieri, pulizia finale aree. Su richiesta dell'Ufficio competente.",
+        detail:"In occasione di fiere, manifestazioni, feste popolari e sagre autorizzate dall'Amministrazione, anche in giorni festivi, la ditta predispone sul territorio un numero adeguato di contenitori per la raccolta differenziata e per il secco residuo. Durante lo svolgimento degli eventi garantisce il ritiro giornaliero dei rifiuti in forma differenziata; al termine effettua una pulizia accurata delle aree interessate, provvedendo allo spostamento, al ritiro e alla ricollocazione dei contenitori e a svuotamenti aggiuntivi giornalieri. Le indicazioni operative vengono comunicate di volta in volta dall'Ufficio competente dell'Amministrazione Comunale.\n\n(art. 33.4.15 del Capitolato Speciale d'Appalto)" },
     ]
   },
   {
     id: "cdr", icon: "🏭", title: "Centro di Raccolta Comunale (CDR)",
     services: [
-      { id:"cdr1", name:"Apertura al pubblico del CDR",                       desc:"6 giorni a settimana per 35 ore settimanali. Personale qualificato presente durante gli orari di apertura." },
-      { id:"cdr2", name:"Punto mobile Parcheggio Palatucci (fase transitoria)",desc:"Operativo fino alla realizzazione del CDR definitivo. Dotato di cassoni scarrabili per ingombranti, RAEE e inerti." },
-      { id:"cdr3", name:"Gestione RAEE al CDR",                               desc:"Deposito integro, distinto per raggruppamento. Nessuna operazione di smontaggio. Movimentazione con apparecchiature idonee." },
-      { id:"cdr4", name:"Sistema di pesatura e registrazione conferimenti",    desc:"Pesatura di tutte le tipologie di rifiuto in ingresso. Registro informatizzato per i conferimenti delle utenze non domestiche." },
-      { id:"cdr5", name:"Sistema di premialità utenti",                        desc:"Attrezzatura hardware/software per premialità (buoni spesa, buoni carburante, gadget) agli utenti virtuosi presso CDR e punti prossimità." },
+      { id:"cdr1", name:"Apertura al pubblico del CDR",
+        desc:"6 giorni a settimana per 35 ore settimanali. Personale qualificato presente durante gli orari di apertura.",
+        detail:"Il Centro Comunale di Raccolta (CDR), una volta realizzato, dovrà essere gestito dalla ditta appaltatrice con apertura al pubblico per 6 giorni a settimana, per un totale di 35 ore settimanali. Durante tutti gli orari di apertura è obbligatoria la presenza di personale qualificato e adeguatamente formato, incaricato di assistere gli utenti durante i conferimenti, verificare la correttezza dei materiali depositati, vigilare sulla sicurezza dell'area e gestire le attrezzature hardware e software per il sistema di premialità. Tutte le spese di gestione ordinaria del CDR — comprese le utenze elettriche, idriche e telefoniche — sono a carico della ditta appaltatrice.\n\n(art. 33.4.17 e art. 40 del Capitolato Speciale d'Appalto)" },
+      { id:"cdr2", name:"Punto mobile Parcheggio Palatucci (fase transitoria)",
+        desc:"Operativo fino alla realizzazione del CDR definitivo. Dotato di cassoni scarrabili per ingombranti, RAEE e inerti.",
+        detail:"Nelle more della realizzazione del Centro Comunale di Raccolta definitivo, la ditta gestisce il punto mobile già esistente presso il Parcheggio Palatucci in via Alcide De Gasperi, nei pressi del complesso La Salle. Il punto mobile è dotato di cassoni scarrabili per il conferimento di ingombranti, RAEE e inerti, con un operatore presente durante gli orari di apertura per assistere gli utenti. Gli orari di apertura sono stabiliti dall'Amministrazione Comunale. La ditta può proporre ulteriori punti mobili analoghi in altre aree della città, da concordare preventivamente con l'Amministrazione, fino alla realizzazione del CDR definitivo.\n\n(art. 33.4.17 del Capitolato Speciale d'Appalto)" },
+      { id:"cdr3", name:"Gestione RAEE al CDR",
+        desc:"Deposito integro, distinto per raggruppamento. Nessuna operazione di smontaggio. Movimentazione con apparecchiature idonee.",
+        detail:"Le apparecchiature elettriche ed elettroniche fuori uso (RAEE) conferite al CDR devono essere depositate in modo integro, distinto per raggruppamento e in sicurezza per gli operatori. È tassativamente vietato effettuare operazioni di smontaggio di parti. La movimentazione dei RAEE deve avvenire con apparecchiature di sollevamento idonee, evitando danni che possano causare il rilascio di sostanze inquinanti o compromettere le successive operazioni di recupero. I RAEE devono essere collocati in cassoni scarrabili dotati di coperchio, con gli sportelli chiusi e le parti mobili fissate. La ditta si interfaccia con il Centro di Coordinamento RAEE per gli svuotamenti e gli adempimenti previsti dalla normativa. I premi di efficienza del Centro di Coordinamento RAEE spettano alla ditta appaltatrice.\n\n(art. 33.4.17 e art. 40 del Capitolato Speciale d'Appalto)" },
+      { id:"cdr4", name:"Sistema di pesatura e registrazione conferimenti",
+        desc:"Pesatura di tutte le tipologie di rifiuto in ingresso. Registro informatizzato per i conferimenti delle utenze non domestiche.",
+        detail:"Il CDR è dotato di strumenti di pesatura forniti dal Comune. La ditta è tenuta a pesare tutte le tipologie di rifiuto in ingresso prima del conferimento nei cassoni. Per le utenze non domestiche, la ditta gestisce un registro informatizzato dei conferimenti, compilato tramite supporto informatico in conformità agli allegati del D.M. 04/08/2008. Il sistema di registrazione deve consentire la produzione di bilanci di massa e bilanci volumetrici, e i dati devono essere trasmessi mensilmente al Comune.\n\n(art. 33.4.17 del Capitolato Speciale d'Appalto)" },
+      { id:"cdr5", name:"Sistema di premialità utenti",
+        desc:"Attrezzatura hardware/software per premialità (buoni spesa, buoni carburante, gadget) agli utenti virtuosi presso CDR e punti prossimità.",
+        detail:"La ditta è tenuta a fornire e gestire un'idonea attrezzatura hardware e software per l'attivazione di un sistema di premialità rivolto agli utenti che conferiscono i propri rifiuti in modo differenziato presso il CDR e i punti di prossimità. Il sistema deve consentire la pesatura in loco del materiale conferito e il riconoscimento di premi agli utenti virtuosi, sotto forma di buoni spesa, buoni carburante o gadget fisici, previa approvazione dell'Amministrazione Comunale. Le caratteristiche tecniche dell'attrezzatura devono essere descritte dettagliatamente nell'offerta tecnica presentata in sede di gara.\n\n(art. 33.4.18 del Capitolato Speciale d'Appalto)" },
     ]
   },
   {
     id: "spazzamento", icon: "🛣️", title: "Spazzamento, diserbo e pulizia stradale",
     services: [
-      { id:"sw1",  name:"Spazzamento manuale",                          desc:"Nelle aree di ridotta estensione o scarsa agibilità. Orario antimeridiano; intensificazione pomeridiana durante festività e in zone ad alta frequentazione." },
-      { id:"sw2",  name:"Spazzino di zona – centro storico",            desc:"7/7 giorni, incluso il periodo pomeridiano della ZTL. In alta stagione anche nella zona Litoranea e Porto." },
-      { id:"sw3",  name:"Spazzamento meccanizzato/misto",               desc:"Spazzatrici aspiranti su carreggiate; manuale su marciapiedi. Operatore a terra accompagna sempre la spazzatrice." },
-      { id:"sw4",  name:"Raccolta foglie (periodo autunnale)",           desc:"Con spazzatrici dotate di aspiratore o soffiatori. Nei giardini pubblici con mezzi a motore elettrico." },
-      { id:"sw5",  name:"Pulizia caditoie e pozzetti",                  desc:"Interventi programmati e su richiesta. Segnalazione al Comune di eventuali guasti o ostruzioni." },
-      { id:"sw6",  name:"Svuotamento cestini portarifiuti",              desc:"Contestuale allo spazzamento. Sostituzione sacco (a carico della ditta). Sanificazione trimestrale. Sostituzione cestini danneggiati entro 24 ore." },
-      { id:"sw7",  name:"Lavaggio e disinfezione suolo pubblico",        desc:"Circa 200 interventi/turni annui con mezzo a pressione (7-12 atm) e prodotti detergenti certificati." },
-      { id:"sw8",  name:"Diserbo stradale",                              desc:"2.500 ore/anno di diserbo ordinario. 2 interventi annui di diserbo chimico su tutta la città (solo se autorizzato dall'ASL)." },
-      { id:"sw9",  name:"Rimozione carcasse animali e deiezioni",        desc:"Su segnalazione dell'Ufficio. Sanificazione del suolo dopo la rimozione." },
-      { id:"sw10", name:"Pulizia aree mercatali (spazzamento)",          desc:"Spazzamento meccanizzato + manuale dopo ogni mercato. Lavaggio e sanificazione con prodotto battericida per le aree ittiche." },
-      { id:"sw11", name:"Spazzamento e pulizia area portuale",           desc:"Spazzamento manuale trisettimanale tutto l'anno. Spazzino di zona dal 1 giugno al 15 settembre." },
+      { id:"sw1", name:"Spazzamento manuale",
+        desc:"Nelle aree di ridotta estensione o scarsa agibilità. Orario antimeridiano; intensificazione pomeridiana durante festività e in zone ad alta frequentazione.",
+        detail:"La ditta effettua lo spazzamento manuale nelle aree del territorio comunale caratterizzate da ridotta estensione o scarsa agibilità per i mezzi meccanici. Il servizio consiste nella pulizia e asportazione dei rifiuti e nell'eliminazione delle erbe lungo strade, piazze e marciapiedi, incluse le fasce di pertinenza dei bordi stradali e delle cunette. Il personale è dotato di scope, palette, carrelli, zappette, decespugliatori e piccole attrezzature elettriche aspiranti o soffiatori a spalla. Il servizio si svolge in orario antimeridiano, con intensificazione pomeridiana durante le festività natalizie e pasquali, nelle piazze e strade adiacenti ai luoghi di culto e nelle zone ad alta frequentazione.\n\n(art. 43 del Capitolato Speciale d'Appalto)" },
+      { id:"sw2", name:"Spazzino di zona – centro storico",
+        desc:"7/7 giorni, incluso il periodo pomeridiano della ZTL. In alta stagione anche nella zona Litoranea e Porto.",
+        detail:"La ditta garantisce la presenza continuativa di spazzini di zona nel centro storico 7 giorni su 7, incluso il periodo pomeridiano durante il quale è attiva la ZTL. Lo spazzino di zona non si limita al mero spazzamento dell'area assegnata, ma interviene dove necessario effettuando anche diserbo, rimozione di deiezioni animali con successiva disinfezione e instaurando un rapporto collaborativo con i residenti per il mantenimento del decoro urbano. Nel periodo estivo il servizio è esteso anche alla zona Litoranea e all'area portuale. Ogni spazzino è dotato di carrello con due bidoni, granata con paletta, zappetta, disinfettante e appositi sacchi.\n\n(art. 43 del Capitolato Speciale d'Appalto)" },
+      { id:"sw3", name:"Spazzamento meccanizzato/misto",
+        desc:"Spazzatrici aspiranti su carreggiate; manuale su marciapiedi. Operatore a terra accompagna sempre la spazzatrice.",
+        detail:"Lo spazzamento meccanizzato viene effettuato nelle strade e nelle grandi aree del territorio comunale con spazzatrici aspiranti, sempre accompagnate da almeno un operatore a terra dotato di scope, palette, zappette, soffiatori e decespugliatori per completare manualmente la pulizia nelle zone di difficile accesso. Le spazzatrici devono essere di tipo aspirante, equipaggiate con spazzole su entrambi i lati e in grado di garantire una fascia di spazzamento non inferiore a 2 metri. Il servizio si svolge in orario antimeridiano, dando priorità alla pulizia dei marciapiedi e delle aree diverse dalla sede stradale prima di procedere con la carreggiata.\n\n(art. 43 del Capitolato Speciale d'Appalto)" },
+      { id:"sw4", name:"Raccolta foglie (periodo autunnale)",
+        desc:"Con spazzatrici dotate di aspiratore o soffiatori. Nei giardini pubblici con mezzi a motore elettrico.",
+        detail:"Nel periodo autunnale e per tutto il tempo necessario in funzione delle condizioni meteorologiche, la ditta effettua la raccolta delle foglie nelle zone alberate, nei viali e nei giardini pubblici. Il servizio viene effettuato con autospazzatrici dotate di sistema aspiratore o soffiatori, oppure con mezzi similari dotati di sistemi di insonorizzazione. Nei giardini pubblici lo spazzamento dei viali, dei vialetti e delle zone adibite al gioco per bambini viene effettuato con mezzi a motore elettrico. Sono escluse dal servizio le superfici erbose e le aree a verde la cui manutenzione non compete alla ditta.\n\n(art. 43 del Capitolato Speciale d'Appalto)" },
+      { id:"sw5", name:"Pulizia caditoie e pozzetti",
+        desc:"Interventi programmati e su richiesta. Segnalazione al Comune di eventuali guasti o ostruzioni.",
+        detail:"La ditta provvede alla pulizia e alla disostruzione di tutti i pozzetti, le griglie e le caditoie stradali per la raccolta delle acque meteoriche compresi nei perimetri di spazzamento, al fine di garantire il normale deflusso delle acque. Gli interventi vengono effettuati sia in modo programmato sia su richiesta del Comune, e in ogni caso al termine di eventi meteorici che abbiano comportato accumulo di materiale (terra, foglie, detriti). La ditta è tenuta a segnalare tempestivamente al Comune eventuali guasti alle installazioni e alle relative condutture.\n\n(art. 43 del Capitolato Speciale d'Appalto)" },
+      { id:"sw6", name:"Svuotamento cestini portarifiuti",
+        desc:"Contestuale allo spazzamento. Sostituzione sacco (a carico della ditta). Sanificazione trimestrale. Sostituzione cestini danneggiati entro 24 ore.",
+        detail:"Lo svuotamento dei cestini portarifiuti viene effettuato contestualmente al servizio di spazzamento. La ditta provvede alla rimozione del sacco usato e alla sua sostituzione con un sacco nuovo, a proprie spese, lasciando l'area circostante pulita. L'operatore verifica il corretto funzionamento del cestino e segnala con nastro bicolore eventuali guasti, provvedendo alla sostituzione entro 24 ore. La ditta effettua la sanificazione dei cestini con cadenza trimestrale. La fornitura e la sostituzione dei sacchi sono a carico della ditta.\n\n(art. 43 del Capitolato Speciale d'Appalto)" },
+      { id:"sw7", name:"Lavaggio e disinfezione suolo pubblico",
+        desc:"Circa 200 interventi/turni annui con mezzo a pressione (7-12 atm) e prodotti detergenti certificati.",
+        detail:"La ditta effettua circa 200 interventi annui di lavaggio e disinfezione del suolo pubblico su strade, piazze, slarghi, parcheggi e aree soggette a pubblico passaggio. Il servizio viene effettuato con apposito mezzo meccanico dotato di sistema a pressione (7-12 atm), previa pulizia preliminare e spazzamento dell'area. L'acqua viene additivata con prodotti detergenti e disinfettanti certificati e non inquinanti. Il servizio si svolge di norma in orario antimeridiano, salvo richiesta del Comune di interventi pomeridiani. Il lavaggio è previsto anche in occasione di manifestazioni, feste religiose e spettacoli all'aperto, senza oneri aggiuntivi per il Comune.\n\n(art. 43 del Capitolato Speciale d'Appalto)" },
+      { id:"sw8", name:"Diserbo stradale",
+        desc:"2.500 ore/anno di diserbo ordinario. 2 interventi annui di diserbo chimico su tutta la città (solo se autorizzato dall'ASL).",
+        detail:"La ditta effettua 2.500 ore annue di diserbo ordinario lungo strade, marciapiedi, banchine, piazze e aree pubbliche, provvedendo all'eliminazione delle erbe infestanti incluse le ricacciate in corrispondenza delle radici degli alberi quando raggiungono i 20 cm di altezza, e al taglio delle erbe lungo le mura e sulle pareti degli edifici pubblici fino a un'altezza di 2,50 metri dal suolo. Sono inoltre previsti 2 interventi annui di diserbo chimico sull'intera città, da concordare con l'Amministrazione con almeno 15 giorni di anticipo, subordinati all'autorizzazione dell'ASL competente. I rifiuti vegetali prodotti (CER 20.02.01) sono smaltiti presso impianti autorizzati.\n\n(art. 43 del Capitolato Speciale d'Appalto)" },
+      { id:"sw9", name:"Rimozione carcasse animali e deiezioni",
+        desc:"Su segnalazione dell'Ufficio. Sanificazione del suolo dopo la rimozione.",
+        detail:"Su segnalazione degli uffici comunali o di altri organismi pubblici, la ditta provvede alla rimozione dal suolo pubblico di carcasse di animali domestici o selvatici di ridotte dimensioni (piccioni, topi, altri roditori), seguita dalla sanificazione del suolo contaminato con appositi prodotti disinfettanti. Per le carcasse di animali di taglia superiore (cani, gatti) la ditta segnala il rinvenimento alla competente ASL, che procede in conformità alle disposizioni normative. Il personale addetto allo spazzamento provvede inoltre alla rimozione delle deiezioni animali presenti sul suolo pubblico nell'area di propria competenza, con successiva sanificazione.\n\n(art. 43 del Capitolato Speciale d'Appalto)" },
+      { id:"sw10", name:"Pulizia aree mercatali (spazzamento)",
+        desc:"Spazzamento meccanizzato + manuale dopo ogni mercato. Lavaggio e sanificazione con prodotto battericida per le aree ittiche.",
+        detail:"La ditta effettua lo spazzamento meccanizzato coadiuvato da spazzamento manuale delle aree adibite a mercato dopo ogni chiusura. Al termine di ogni intervento di pulizia viene effettuato il lavaggio meccanizzato e la sanificazione delle aree con soluzioni detergenti ad alta pressione (7-12 atm). Le aree riservate agli ambulanti di prodotti ittici vengono lavate e disinfettate accuratamente con prodotto battericida. Per i mercati con orario spezzato il lavaggio avviene due volte al giorno; per i mercati domenicali il servizio viene effettuato una sola volta a partire dalle ore 14:00.\n\n(art. 43 del Capitolato Speciale d'Appalto)" },
+      { id:"sw11", name:"Spazzamento e pulizia area portuale",
+        desc:"Spazzamento manuale trisettimanale tutto l'anno. Spazzino di zona dal 1 giugno al 15 settembre.",
+        detail:"Nell'area portuale la ditta garantisce il servizio di spazzamento manuale con frequenza minima trisettimanale per tutto l'anno. Nel periodo estivo, dal 1 giugno al 15 settembre, è prevista la presenza continuativa di uno spazzino di zona nell'area portuale. Il servizio include la pulizia delle banchine, delle aree di accesso ai moli e di tutte le superfici pubbliche dell'area portuale, con le stesse modalità previste per lo spazzamento nelle altre zone della città.\n\n(art. 43 del Capitolato Speciale d'Appalto)" },
     ]
   },
   {
     id: "comunicazione", icon: "📢", title: "Comunicazione, utenza e monitoraggio",
     services: [
-      { id:"cm1", name:"Numero Verde – servizio telefonico all'utenza", desc:"Attivo almeno 6 giorni/settimana, 6 ore/giorno. Risposta diretta 9:00-14:00. Segreteria telefonica h24. Gestione prenotazioni e segnalazioni disservizi." },
-      { id:"cm2", name:"Front-office sul territorio",                   desc:"Attivato entro 3 mesi dalla stipula del contratto. Potrà essere collocato presso il CDR una volta realizzato." },
-      { id:"cm3", name:"Carta dei Servizi",                             desc:"Consegnata a tutti gli utenti entro 3 mesi dalla consegna del servizio. Include standard di qualità, modalità di reclamo e dati aziendali." },
-      { id:"cm4", name:"Rapporti mensili all'Ente",                     desc:"Entro il 15 di ogni mese: quantitativi di raccolta per categoria, riepilogo servizi su richiesta, segnalazioni di disservizi." },
-      { id:"cm5", name:"Campagna di sensibilizzazione e cortesia",      desc:"Avviso adesivo su conferimenti non conformi. Campagna di riduzione dei conferimenti errati, con il supporto degli organi di controllo." },
-      { id:"cm6", name:"Sede operativa sul territorio",                 desc:"La ditta deve disporre di una sede operativa nel Comune di Torre del Greco o nel comune limitrofo." },
-      { id:"cm7", name:"Fornitura attrezzature tariffazione puntuale",  desc:"Mastelli con TAG RFID, buste con codice a barre (208 unità/anno per frazioni secche; 153 per organico), tessere Smart card." },
+      { id:"cm1", name:"Numero Verde – servizio telefonico all'utenza",
+        desc:"Attivo almeno 6 giorni/settimana, 6 ore/giorno. Risposta diretta 9:00-14:00. Segreteria telefonica h24. Gestione prenotazioni e segnalazioni disservizi.",
+        detail:"La ditta è tenuta ad attivare entro 30 giorni dall'avvio del servizio un numero verde gratuito a disposizione di tutti i cittadini e delle utenze non domestiche. Il servizio è attivo almeno 6 giorni a settimana, dal lunedì al sabato, per 6 ore al giorno, con risposta diretta da parte di un operatore nella fascia oraria 9:00-14:00 e segreteria telefonica attiva h24. Il personale addetto deve possedere adeguata formazione ambientale e conoscenza delle procedure di conferimento dei rifiuti.\n\nTramite il numero verde gli utenti possono ottenere informazioni sui servizi di raccolta, richiedere la sostituzione di contenitori, prenotare servizi a chiamata (ingombranti, RAEE, verde), segnalare disservizi e presentare reclami. Alle segnalazioni di disservizi la ditta è tenuta a dare rimedio entro 24 ore dalla chiamata.\n\n(art. 33.4.24 del Capitolato Speciale d'Appalto)" },
+      { id:"cm2", name:"Front-office sul territorio",
+        desc:"Attivato entro 3 mesi dalla stipula del contratto. Potrà essere collocato presso il CDR una volta realizzato.",
+        detail:"La ditta è tenuta ad attivare entro 3 mesi dalla stipula del contratto uno sportello fisico sul territorio comunale, a disposizione dei cittadini per informazioni, prenotazioni e segnalazioni relative ai servizi di igiene urbana. Il front-office può essere collocato presso il Centro Comunale di Raccolta una volta realizzato, previa autorizzazione del Comune. Lo sportello integra il servizio del numero verde e rappresenta il punto di contatto diretto tra la ditta e la cittadinanza per tutte le questioni legate all'esecuzione del servizio.\n\n(art. 33.4.25 del Capitolato Speciale d'Appalto)" },
+      { id:"cm3", name:"Carta dei Servizi",
+        desc:"Consegnata a tutti gli utenti entro 3 mesi dalla consegna del servizio. Include standard di qualità, modalità di reclamo e dati aziendali.",
+        detail:"La ditta è tenuta a elaborare e consegnare a tutti gli utenti del Comune una Carta dei Servizi entro 3 mesi dalla data di verbale di consegna del servizio. La Carta dei Servizi è il documento con cui la ditta informa i cittadini in modo chiaro e completo su tutti i servizi erogati, gli standard di qualità garantiti, le modalità di conferimento dei rifiuti, le procedure di reclamo e le forme di tutela dell'utente.\n\nIl documento deve trattare almeno i seguenti argomenti: profilo aziendale, principi fondamentali, standard di qualità, modalità di raccolta differenziata e indifferenziata, gestione del CDR, comportamento del personale e procedure di reclamo e ristoro. La Carta ha formato 17x24 cm, è stampata in quadricromia ed è disponibile anche in formato PDF sul sito del Comune. La stampa e la distribuzione sono a carico della ditta.\n\n(art. 33.4.23 del Capitolato Speciale d'Appalto)" },
+      { id:"cm4", name:"Rapporti mensili all'Ente",
+        desc:"Entro il 15 di ogni mese: quantitativi di raccolta per categoria, riepilogo servizi su richiesta, segnalazioni di disservizi.",
+        detail:"La ditta è tenuta a trasmettere al Comune, entro il 15 di ogni mese, una comunicazione scritta contenente i dati aggiornati relativi all'andamento del servizio nel mese precedente. Il rapporto mensile deve includere: i quantitativi di rifiuti raccolti suddivisi per tipologia merceologica (frazione umida, secca, carta, multimateriale, vetro, ingombranti, verde, pile, farmaci, mercatali, ecc.); il riepilogo dettagliato dei servizi su richiesta effettuati; le segnalazioni di eventuali disservizi riscontrati. I dati devono essere forniti anche su supporto informatico. Sulla base di questi rapporti il Comune verifica il raggiungimento degli obiettivi di raccolta differenziata previsti dalla normativa (minimo 65%).\n\n(art. 18 e art. 29 del Capitolato Speciale d'Appalto)" },
+      { id:"cm5", name:"Campagna di sensibilizzazione e cortesia",
+        desc:"Avviso adesivo su conferimenti non conformi. Campagna di riduzione dei conferimenti errati, con il supporto degli organi di controllo.",
+        detail:"La ditta è tenuta ad attivare una campagna continuativa di sensibilizzazione degli utenti al corretto conferimento dei rifiuti. In caso di conferimento non conforme, il personale appone sull'esposizione un avviso adesivo che segnala la non conformità e indica le modalità corrette di separazione e conferimento. La ditta avvia inoltre una campagna più strutturata di riduzione dei conferimenti errati, anche con il supporto degli organi di controllo comunali ove l'Ente ne ravvisi la necessità. L'obiettivo è ridurre progressivamente la percentuale di rifiuti conferiti in modo non conforme, migliorando la qualità della raccolta differenziata.\n\n(art. 33.4.25 del Capitolato Speciale d'Appalto)" },
+      { id:"cm6", name:"Sede operativa sul territorio",
+        desc:"La ditta deve disporre di una sede operativa nel Comune di Torre del Greco o nel comune limitrofo.",
+        detail:"La ditta appaltatrice è tenuta a installare e mantenere per tutta la durata del contratto una sede operativa con ufficio di sorveglianza nel territorio del Comune di Torre del Greco o in un comune limitrofo, commisurata all'entità del servizio e tale da consentire agevoli controlli da parte degli organi deputati. La sede operativa costituisce il centro logistico del servizio: da essa partono e vi fanno rientro i mezzi e il personale impiegati. La ditta è tenuta a comunicare al Comune l'indirizzo della sede operativa e a notificare tempestivamente qualsiasi variazione.\n\n(art. 30 e art. 33.4.25 del Capitolato Speciale d'Appalto)" },
+      { id:"cm7", name:"Fornitura attrezzature tariffazione puntuale",
+        desc:"Mastelli con TAG RFID, buste con codice a barre (208 unità/anno per frazioni secche; 153 per organico), tessere Smart card.",
+        detail:"La ditta fornisce a tutte le utenze domestiche le attrezzature necessarie per l'attivazione del sistema di tariffazione puntuale dei rifiuti, che consente di misurare i conferimenti individuali ai fini di una TARI più equa e proporzionale. Le forniture comprendono: mastelli dotati di TAG RFID per l'identificazione automatica dell'utenza al momento dello svuotamento; buste con codice a barre personalizzato per utenza, in misura di 208 unità annue per le frazioni secche e 153 unità annue per la frazione organica; tessere Smart card personalizzate per l'accesso ai punti di prossimità e alle eco-isole. I contenitori devono essere conformi ai Criteri Ambientali Minimi (CAM) previsti dal D.M. 13.02.2014 e dal D.M. 05.02.2015.\n\n(art. 33.4.28 del Capitolato Speciale d'Appalto)" },
     ]
   }
 ];
@@ -431,15 +516,9 @@ async function loadSheetData() {
   }
 }
 
-function getStatus(id) {
-  return sheetData[id] ? sheetData[id].stato : "da-verificare";
-}
-function getNota(id) {
-  return sheetData[id] ? sheetData[id].nota : "";
-}
-function getData(id) {
-  return sheetData[id] ? sheetData[id].data : "";
-}
+function getStatus(id) { return sheetData[id] ? sheetData[id].stato : "da-verificare"; }
+function getNota(id)   { return sheetData[id] ? sheetData[id].nota  : ""; }
+function getData(id)   { return sheetData[id] ? sheetData[id].data  : ""; }
 
 function computeStats() {
   const counts = { implementato:0, parziale:0, "non-implementato":0, "da-verificare":0 };
@@ -448,6 +527,29 @@ function computeStats() {
     counts[s] = (counts[s]||0) + 1;
   }));
   return counts;
+}
+
+function toggleDetail(id) {
+  const el = document.getElementById("detail-" + id);
+  const btn = document.getElementById("btn-" + id);
+  if (!el) return;
+  const isOpen = el.classList.contains("open");
+  el.classList.toggle("open", !isOpen);
+  btn.textContent = isOpen ? "Leggi di più" : "Chiudi";
+}
+
+function toggleSection(id) {
+  const list = document.getElementById("list-" + id);
+  const chev = document.getElementById("chev-" + id);
+  if (!list) return;
+  const isOpen = list.classList.contains("open");
+  list.classList.toggle("open", !isOpen);
+  chev.classList.toggle("open", !isOpen);
+}
+
+function setFilter(f) {
+  currentFilter = f;
+  renderAll();
 }
 
 function renderAll() {
@@ -461,14 +563,12 @@ function renderAll() {
       <div class="stat-card"><div class="stat-label">Da verificare</div><div class="stat-value" style="color:var(--status-check)">${counts["da-verificare"]}</div></div>
       <div class="stat-card"><div class="stat-label">Non implementati</div><div class="stat-value" style="color:var(--status-no)">${counts["non-implementato"]}</div></div>
     </div>
-
     <div class="legend">
       <div class="legend-item"><div class="legend-dot" style="background:var(--status-ok)"></div> Implementato</div>
       <div class="legend-item"><div class="legend-dot" style="background:var(--status-partial)"></div> Parzialmente implementato</div>
       <div class="legend-item"><div class="legend-dot" style="background:var(--status-no)"></div> Non implementato</div>
       <div class="legend-item"><div class="legend-dot" style="background:var(--status-check)"></div> Da verificare</div>
     </div>
-
     <div class="filter-row">
       <span class="filter-label">Filtra per stato:</span>
       <button class="filter-btn ${currentFilter==='all'?'active':''}" onclick="setFilter('all')">Tutti</button>
@@ -476,8 +576,7 @@ function renderAll() {
       <button class="filter-btn ${currentFilter==='non-implementato'?'active':''}" onclick="setFilter('non-implementato')">Non implementati</button>
       <button class="filter-btn ${currentFilter==='parziale'?'active':''}" onclick="setFilter('parziale')">Parzialmente implementati</button>
       <button class="filter-btn ${currentFilter==='implementato'?'active':''}" onclick="setFilter('implementato')">Implementati</button>
-    </div>
-  `;
+    </div>`;
 
   SECTIONS.forEach(sec => {
     const filtered = currentFilter === "all"
@@ -496,17 +595,24 @@ function renderAll() {
         <div class="service-list open" id="list-${sec.id}">
           ${filtered.map(sv => {
             const stato = getStatus(sv.id);
-            const nota = getNota(sv.id);
-            const data = getData(sv.id);
+            const nota  = getNota(sv.id);
+            const data  = getData(sv.id);
+            const detailParas = sv.detail.split('\n\n').map(p => `<p>${p}</p>`).join('');
             return `
               <div class="service-row">
-                <div>
-                  <div class="service-name">${sv.name}</div>
-                  <div class="service-desc">${sv.desc}</div>
-                  ${nota ? `<div class="service-note">📋 ${nota}</div>` : ''}
-                  ${data ? `<div class="service-meta">Aggiornato in assemblea: ${data}</div>` : ''}
+                <div class="service-row-header">
+                  <div>
+                    <div class="service-name">${sv.name}</div>
+                    <div class="service-desc">${sv.desc}</div>
+                    ${nota ? `<div class="service-note">📋 ${nota}</div>` : ''}
+                    ${data ? `<div class="service-meta">Aggiornato in assemblea: ${data}</div>` : ''}
+                  </div>
+                  <div class="service-right">
+                    <span class="status-badge ${stato}">${LABEL[stato]||stato}</span>
+                    <button class="detail-btn" id="btn-${sv.id}" onclick="toggleDetail('${sv.id}')">Leggi di più</button>
+                  </div>
                 </div>
-                <span class="status-badge ${stato}">${LABEL[stato]||stato}</span>
+                <div class="service-detail" id="detail-${sv.id}">${detailParas}</div>
               </div>`;
           }).join('')}
         </div>
@@ -514,20 +620,6 @@ function renderAll() {
   });
 
   document.getElementById("mainContent").innerHTML = html;
-}
-
-function toggleSection(id) {
-  const list = document.getElementById("list-"+id);
-  const chev = document.getElementById("chev-"+id);
-  if (!list) return;
-  const isOpen = list.classList.contains("open");
-  list.classList.toggle("open", !isOpen);
-  chev.classList.toggle("open", !isOpen);
-}
-
-function setFilter(f) {
-  currentFilter = f;
-  renderAll();
 }
 
 loadSheetData();
